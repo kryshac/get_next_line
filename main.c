@@ -6,7 +6,7 @@
 /*   By: ccristia <ccristia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/19 16:08:14 by ccristia          #+#    #+#             */
-/*   Updated: 2017/12/19 19:36:16 by ccristia         ###   ########.fr       */
+/*   Updated: 2017/12/19 20:27:08 by ccristia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ int	main(void)
 	char	*str;
 
 	file = open("test", O_RDONLY);
-	printf("numar fisier - %d\n", file);
-	file = open("test", O_RDONLY);
-	printf("numar fisier - %d\n", file);
 	while (get_next_line(file, &str))
-		;
-	printf("%s\n", str);
+	{
+		printf("%s\n", str);
+	}
 	return (0);
 }
