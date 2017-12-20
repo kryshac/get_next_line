@@ -1,1 +1,152 @@
-randu1 1 ar1
+C (/ˈsiː/) este un limbaj de programare standardizat. Este implementat pe majoritatea platformelor de calcul existente azi, și este cel mai popular limbaj de programare pentru scrierea de software de sistem. Este apreciat pentru eficiența codului obiect generat de compilatoarele C, și pentru portabilitatea sa.
+
+A fost dezvoltat la începutul anilor 1970 de Ken Thompson și Dennis Ritchie, care aveau nevoie de un limbaj simplu și portabil pentru scrierea nucleului sistemului de operare UNIX.
+
+Sintaxa limbajului C a stat la baza multor limbaje create ulterior și încă populare azi: C++, Java, JavaScript, C#, D.[5]
+
+C este un limbaj de programare relativ minimalist ce operează în strânsă legătură cu hardware-ul, fiind cel mai apropiat de limbajul de asamblare față de majoritatea celorlalte limbaje de programare.
+Scurtă introducere în C
+C este prezentat uneori ca „asamblor portabil”, făcându-se astfel diferențele principale față de limbajele de asamblare: codul unui program C poate fi compilat și rulat pe aproape orice tip de mașină (calculator), asemănător altor limbaje de programare, în timp ce limbajele de asamblare sunt specifice unui anumit model de mașină. Limbajul C aparține clasei limbajelor de nivel scăzut sau de nivel mediu, aceasta indicând strânsa legătură între interoperabilitate și echipamentul hardware.
+
+C a fost creat având drept scop important de a face ca programele mari să poată fi scrise mai ușor și cu mai puține erori în paradigma programării procedurale, dar fără a pune un obstacole în scrierea compilatorului de C, care este încărcat de caracteristicile complexe ale limbajului. C are urmatoarele caracteristici importante:
+
+Este un limbaj de bază simplu, cu importante funcționalități cum ar fi funcțiile matematice sau cele de manipulare ale fișierelor
+Este focalizat pe paradigma programării procedurale, care facilitează programarea într-un mod structurat
+Utilizează un set simplu de tipuri de date ce împiedică multe operații neintenționate
+Folosește un limbaj preprocesor, preprocesorul C, pentru sarcini cum ar fi definirea de macrouri și includerea mai multor fișiere sursă
+Permite accesarea la nivel scăzut a memoriei calculatorului prin utilizarea pointerilor
+Permite folosirea parametrilor, care sunt comunicați funcțiilor prin valoare și nu prin referință
+Pointeri la funcții, ce permit forme rudimentare de închidere (engleză closure) și polimorfism
+Declararea variabilelor
+Structuri de date sau tipuri de date agregate, definite de utilizator prin (struct), ce permit ca date înrudite să fie combinate și manipulate ca un întreg[necesită citare]
+Printre caracteristicile ce lipsesc în C, dar care pot fi găsite în alte limbaje de programare se enumeră:
+
+Un sistem automat de colectare a reziduurilor (de memorie) (engleză Garbage collection)
+Clasele și obiectele (programarea orientată pe obiecte)
+Un sistem avansat de tipuri de date
+Programarea generică
+Supraîncărcarea
+Procesarea listelor
+Deși lista minusurilor limbajului C este destul de lungă, aceasta nu reprezintă un dezavantaj suficient de mare pentru inhiba utilizarea limbajului C în practică, deoarece permite ca noi compilatoare să poată fi scrise pe noi tipuri de platforme și pentru că permite programatorului să țină bine sub control programul pe care îl scrie. Acesta este unul din motivele care face ca un cod scris în C să fie mult mai eficient decât dacă ar fi scris în alte limbaje de programare. Numai un cod scris cu foarte mare grijă într-un limbaj de asamblare poate fi mai performant, deoarece are control integral asupra mașinii, dar performanța avansată a compilatoarelor, combinată cu complexitatea noilor tipuri de procesoare, a făcut ca limbajul C să fie preferat și să fie acceptat din ce în ce mai mult de programatori.
+
+Una din consecințele acceptării și eficienței C-ului este aceea că multe compilatoare, biblioteci și interpretoare ale limbajelor de nivel înalt sunt adesea implementate în C.
+
+Un exemplu de program C („Hello World!”)
+O variantă a următorului exemplu de program a apărut în prima ediție a cărții lui Brian Kernighan și Dennis Ritchie și a devenit un exemplu standard de program introductiv în majoritatea cărților de programare, indiferent de limbajul de programare. Programul afișează „Hello, World!“ la ieșirea standard, care este, de obicei, un terminal sau monitor. Poate să fie, totuși, și un fișier sau alt dispozitiv hardware, depinzând de maparea ieșirii standard în momentul execuției programului.
+
+#include <stdio.h>
+
+int main(void)
+{
+    printf("Hello, World!\n");
+
+    return 0;
+}
+Urmează o discuție linie cu linie a programului prezentat mai sus:
+
+#include <stdio.h>
+Prima linie a programului reprezintă o directivă preprocesor, #include. Aceasta face ca preprocesorul să substituiască linia respectivă cu conținutul unui fișier sau al entității la care se face referire. În acest caz, antetul standard stdio.h — care conține definițiile funcțiilor de manipulare a intrării și ieșirii standard — va înlocui acea linie.
+
+int main(void)
+Următoarea linie definește funcția numită main. Funcția main are un loc bine stabilit în programele C. Când un program C este executat, aceasta este prima funcție executată (punctul de intrare în program). Prezența acesteia este obligatorie pentru ca un program să poată fi executat. Porțiunea de cod int indică faptul că valoare întoarsă — valoare pe care funcția main o va întoarce procesului apelant — este un întreg. (void) indică faptul că funcția main nu primește nici un argument la apelare.
+
+{
+Paranteza acoladă deschisă indică începutul codului pentru funcția main.
+
+    printf("Hello World\n");
+Aceasta linie apelează — caută și execută codul — funcția printf, care a fost definită în fișierul header stdio.h. În cadrul acestui apel, funcției printf îi este pasat (transmis) un singur argument, șirul de caractere "Hello, World!\n". Secvența \n este denumită secvență escape (cu semnificație specială), care se traduce prin caracterul EOL (end-of-line, sfârșitul liniei), pentru a muta cursorul pe linia următoare. Valoarea de întoarcere a funcției printf este un întreg int, dar nu este folosită în acest caz (este "ignorată").
+
+    return 0;
+Această instrucțiune termină execuția codului funcției main și face ca aceasta să întoarcă valoarea 0 procesului apelant, în cazul acesta sistemului de operare.
+
+}
+Paranteza acoladă închisă indică terminarea codului funcției main.
+
+Tipuri de date
+C are un sistem de tipuri de date similar cu cel al descendenților ALGOL, cum ar fi Pascal, dar totuși cu anumite diferențe. Cuprinde tipuri de date cum ar fi întregi de diferite dimensiuni, cu sau fără semn, numere în virgulă mobilă, enumerări (enum), structuri de date (struct) și uniuni (union).
+
+C utilizează foarte mult pointerii, un tip de referință foarte simplu, care păstrează adresa unui obiect din memorie. Adresa poate fi manipulată cu ajutorul aritmeticii pointerilor. În momentul compilării, un pointer este un tip de dată complex, ce reprezintă atât adresa de memorie cât și tipul de dată. Acest lucru permite expresiilor ce utilizează pointeri să fie evaluate după tipul de dată. Pointerii au mai multe utilizări în C. De exemplu, șirurile de caractere (engleză text string) sunt adesea reprezentate printr-un pointer la un vector de caractere. Alocarea dinamică a memoriei este realizată tot cu ajutorul pointerilor.
+
+Un pointer null are o valoare rezervată, indicând faptul că face referire la o locație nevalidă. Acest lucru este folositor în cazuri speciale cum ar fi pointerul next (următorul) în nodul final al unei liste înlănțuite. Dereferențierea unui pointer null poate cauza un comportament imprevizibil al aplicației. De asemenea, există și pointeri de tip void, fapt ce indică referirea la un obiect de tip necunoscut. Acești pointeri sunt foarte folositori în programarea generică. Deoarece dimensiunea și tipul obiectelor la care acest tip de pointeri face referire sunt necunoscute, aceștia nu pot fi dereferențiați, dar pot fi convertiți la alt tip de pointeri.
+
+În C, anterior standardului C99, tablourile (vectorii) sunt de dimensiune fixă, statică, cunoscută la momentul compilării; în practică, acest lucru nu reprezintă o piedică, având în vedere că se pot aloca blocuri de memorie în momentul rulării, tratându-le ca pe tablouri utilizând librăria standard. Spre deosebire de multe alte limbaje de programare, C evalueaza numele tablourilor ca și pointeri: o adresă și un tip de dată. Prin urmare, valorile index pot depăși dimensiunea actuală a unui tablou.
+
+De asemenea, C oferă posibilitatea de lucru cu tablouri multidimensionale. Din punct de vedere semantic, tablourile multidimensionale sunt tablouri de tablouri.
+
+Alocarea memoriei
+Una din cele mai importante funcții ale unui limbaj de programare este ca acesta să furnizeze metode de management a memoriei și al obiectelor stocate în memorie. C furnizează trei metode distincte de alocare a memoriei pentru obiecte:
+
+Alocarea statică a memoriei: adresele și dimensiunile obiectelor ce fac uz de alocarea statică a memoriei sunt fixate în momentul compilării și pot fi plasate într-o zonă de dimensiune fixă ce corespunde unei secțiuni din cadrul fișierului linkedidat final. Acest tip de alocare a memoriei se numește statică deoarece locația și dimensiunea lor nu variază pe durata de execuție a programului.
+Alocarea automată a memoriei: obiectele temporare (variabilele locale declarate în cadrul unui bloc de cod) sunt stocate în cadrul de stivă asociat funcției apelate, iar spațiul alocat este automat eiberat și reutilizat după ce s-a părăsit blocul în care acestea au fost declarate.
+Alocarea dinamică a memoriei: blocuri de memorie de orice dimensiune pot fi alocate într-o zonă de memorie numită heap prin intermediul funcțiilor malloc(), calloc() și realloc(). Aceste blocuri de memorie pot fi reutilizate după ce zona de memorie a fost eliberată prin apelul funcției free().
+Nu toate variabilele sunt automat alocate. Următoarele tipuri de variabilă sunt alocate static:
+
+toate variabilele globale, indiferent dacă au fost sau nu declarate ca statice;
+variabilele locale declarate explicit ca fiind statice.
+Variabilele alocate static au alocată locația lor de memorie și inițializată înainte ca funcția main să fie executată și nu sunt dealocate până când se termină execuția funcției main. Variabilele alocate static nu sunt reinițializate la fiecare apel al funcției în cadrul cărora au fost declarate. O variabilă alocată static are avantajul că își păstrează valoarea, chiar dacă funcțiile care accesează acea valoare nu mai sunt active.
+
+Acolo unde este posibil, alocarea automată sau statică este preferată deoarece alocarea memoriei este coordonată de compilator, nemaifiind nevoie ca programatorul să aloce iar apoi să elibereze memoria - operație ce adesea generează erori. Totuși, multe structuri de date sunt variabile în dimensini și deoarece alocarea automată și cea statică trebuie să fie de dimensiune fixă în momentul compilării, sunt multe situații în care alocarea dinamică trebuie folosită. Un exemplu ar fi tablourile de dimensiuni variabile.
+
+Sintaxa
+Vezi și Sintaxa limbajului C
+Spre deosebire de alte limbaje de programare cum ar fi Fortran 77, C-ul are o formă liberă, lăsând programatorul să-și organizeze codul folosind spațiile albe. Comentarii pot fi înserate oriunde în cadrul programului utilizând delimitatorii /* și */.
+
+Fiecare fișier sursă conține declarații de variabile și definiții de funcții. Funcțiile, la rândul lor, conțin alte declarații de variabile și comenzi. Declarațiile de variabile fie definesc noi tipuri folosind cuvinte cheie precum struct, union și enum sau atribuind un tip de date predefinite, prin scrierea tipului de dată și urmat de numele variabilei. Cuvinte cheie precum char, int, precum și pointerul la unul din aceste tipuri * reprezintă tipuri de date implementate nativ în C. Secțiuni de cod sunt incluse între paranteze acolade ({ și }), pentru a indica pentru ce porțiune a codului se aplică declarațiile de variabile și celelalte structuri de control.
+
+Comenzile execută acțiuni cum ar fi cele de modificare ale valorii unei variabile sau afișarea unui text la consolă. Structurile de control sunt variabile pentru execuții condiționale sau iterații, realizate cu ajutorul cuvintelor rezervate if, else, switch, do, while și for. Salturi arbitrare sunt posibile prin folosirea cuvântului cheie goto. Cu ajutorul unei varietăți de operatori implementați în C, se pot realiza operații aritmetice, logice, comparative, pe biți, indexarea tablourilor și atribuiri. Comenzile pot de asemenea apela funcții, incluzând un număr mare de funcții din bibliotecile standard ale limbajului C, necesare pentru realizarea diferitelor sarcini cerute de programator.
+
+Istoric
+Începuturile limbajului de programare C
+Etapa inițială de dezvoltare a limbajului de programare C a avut loc în cadrul laboratoarelor AT&T Bell între anii 1969 și 1973. După spusele lui Dennis Ritchie, cea mai creativă perioadă a avut loc în 1972. A fost denumit „C“ deoarece multe din caracteristicile sale au fost derivate din limbajul de programare „B“.
+
+Sunt multe legende despre originea limbajului C și legătura sa cu sistemul de operare Unix, cum ar fi:
+
+Dezvoltarea limbajului C a fost rezultatul dorinței programatorilor de a juca un joc de tipul Asteroids. Aceștia îl jucau pe calculatorul principal al companiei, dar din lipsa de resurse și datorită faptului că acesta trebuia să suporte mai mult de 100 de utilizatori, Thompson și Ritchie, nemulțumiți de controlul pe care îl aveau asupra navei în încercarea de a evita asteroizii, au decis să porteze jocul pe un PDP-7, nefolosit, din birou. Dar această mașină nu avea un sistem de operare, așa că au hotărât să scrie unul. Au decis ca eventual să porteze acest sistem de operare pe mașinile PDP-11 pe care aceștia le foloseau în birou, dar era o muncă destul de dificilă având în vedere că totul era scris în limbaj de asamblare. Așa că au decis să folosească un limbaj portabil de nivel înalt astfel încât sistemul de operare să poată fi portat cu ușurință de pe un computer pe altul. Au încercat folosind limbajul de programare B, dar îi lipseau unele din funcționalitățile care ar fi făcut facilă folosirea unor caracteristici avansate a mașinii PDP-11. Astfel, a apărut un nou limbaj de programare, numit C.
+Justificarea pentru obținerea primului computer care a fost utilizat pentru dezvoltarea sistemului de operare Unix a fost acela de a crea un sistem pentru a automatiza completarea autorizațiilor. Prima versiune a sistemului de operare Unix a fost scrisă în limbaj de asamblare. Mai târziu, limbajul de programare C a fost folosit pentru a rescrie sitemul de operare.
+Începând cu anul 1973, limbajul de programare C a devenit destul de robust, astfel încât mare parte a kernelului Unix, scris inițial în limbaj de asamblare pentru PDP 11/20, a fost rescris în C. Acesta a fost unul din primele kernele ale unui sistem de operare scris într-un limbaj de programare, altul decât limbajul de asamblare. Încercări anterioare au fost pentru scrierea sistemului Multics (scris în PL/I) și TRIPOS (scris în BCPL).
+
+K&R C
+În 1978, Dennis Ritchie și Brian Kernighan au publicat prima ediție a cărții Limbajul de programare C (eng. The C Programming Language). Această carte, cunoscută în cercul programatorilor sub numele K&R, a servit pentru mulți ani ca un mijloc de informare asupra specificațiilor limbajului C. Versiunea limbajului C descrisă este cunoscută sub numele K&R C.
+
+K&R aduce în discuție următoarele caracteristici ale limbajului:
+
+Tipul de dată struct
+Tipul de dată long int
+Tipul de dată unsigned int
+Operatorul =+ a fost schimbat în +=, precum și ceilalți operatori înrudiți (=+ producea confuzii analizorului lexical al compilatorului limbajului C; de exemplu: i += 10 comparat cu i = +10).
+K&R C este adesea considerat limbajul de bază pe care orice compilator C trebuie să-l suporte. Pentru mulți ani, chiar și după introducerea standardului ANSI C, a fost considerat ca fiind „cel mai mic numitor comun“ pe care programatorii în C trebuie să-l respecte atunci când se vorbește de portabiliitate maximă, deoarece nu toate compilatoarele sunt scrise încă să suporte standardul ANSI C, iar o secvență de cod scrisă în K&R C respectă și ANSI C.
+
+În primele versiuni C, numai funcțiile care returnau o valoare non-integer trebuiau să fie definite sau declarate înainte de folosire. Despre o funcție folosită fără ca aceasta să fi fost declarată în prealabil se presupunea că întoarce un întreg. Parametrii funcțiilor nu erau verificați după tip, totuși unele compilatoare afișau un mesaj de atenționare dacă o funcție era apelată cu un număr greșit de argumente.
+
+În anii ce au urmat publicației K&C R, câteva caracteristici „neoficiale“ au fost adăugate limbajului C, fiind suportate de compilatoarele celor de la AT&T, precum și de alți producători. Acestea includ:
+
+funcțiile void și tipul de date void *
+funcțiile care întorc tipul struct sau union
+numele câmpurilor unei structuri struct într-un spațiu de nume pentru fiecare tip de structură
+atribuirea pentru tipurile de date de tip struct
+calificatorul const pentru a face un obiect de tip „read only“
+o bibliotecă standard încorporând funcții implementate de diverși dezvoltatori
+enumerațiile
+tipul float în precizie simplă.
+ANSI C și ISO C
+La sfârșitul anilor 1970, C a început să înlocuiască limbajul BASIC devenind cel mai utilizat limbaj de programare. În anii 1980 a fost adoptat și de calculatoarele IBM PC, popularitatea acestuia începând să crească semnificativ. În acest timp, Bjarne Stroustrup împreună cu alți colegi de la Bell Labs au început să adauge limbajului C caracteristici ale programării orientate pe obiecte. Limbajul rezultat a fost denumit C++ și este cel mai popular limbaj de programare pe sistemele de operare Microsoft Windows; totuși C-ul rămâne cel mai popular limbaj de programare în Unix. Alt limbaj de programare dezvoltat în acea vreme se numește Objective-C care adaugă de asemenea C-ului caracteristici ale programării orientate pe obiecte. Deși nu la fel de popular ca C++, Obejective-C este folosit pentru dezvoltarea aplicațiilor pe ce folosesc interfața Cocoa a sistemului de operare Mac OS X.
+
+În 1983, American National Standards Institute (ANSI) a format un comitet, X3J11, pentru a stabili specificațiile unui limbaj C standard. După un proces îndelungat, standardul a fost terminat în 1989 și ratificat ca ANSI X3.159-1989 "Programming Language C". Această versiune a limbajului ne este cunoscută sub numele ANSI C. în 1990, standardul ANSI C (cu mici modificări) a fost adoptat de International Organization for Standardization (ISO) ca ISO/IEC 9899:1990.
+
+Una din țintele procesului de standardizare ANSI C a fost acela de a produce un superset al K&C R, încorporând multe dintre caracteristicile neoficiale introduse secvențial. Totuși, comitetul pentru standardizare a introdus câteva caracteristici noi, cum ar fi prototipul funcțiilor (împrumutat din C++) și un preprocesor mult mai capabil.
+
+ANSI C este suportat de marea majoritate a compilatoarelor folosite astăzi. Mare parte din codul C scris acum este bazat pe ANSI C. Orice program scris exclusiv în standardul C este garantat să funcționeze corect pe orice platformă cu o implementare C conformă. Totuși, multe programe sunt scrise astfel încât aceste vor putea fi compilate numai pe anumite platforme, sau folosind un anumit compilator, deoarece (i) se folosesc biblioteci non-standard, de exemplu pentru interfața grafică, (ii) unele compilatoare ce nu respectă standardul ANSI C, deci și urmașii lor în mod implicit sau (iii) bazarea pe dimensiunea unui anumit tip de date pe anumite platforme.
+
+C99
+După procesul de standardizare ANSI, specificațiile limbajului de programare C au rămas nemodificate pentru o perioadă, în timp ce C++ a continuat să evolueze. (Amendamentul Normativ I a creat o nouă versiune a limbajului C în 1995, dar această versiune este prea puțin cunoscută.) Totuși, la sfârșitul anilor 1990, standardul a suferit o revizie, conducând la publicarea standardului ISO 9899:1999 în anul 1999. Acest standard este cunoscut sub numele „C99“. A fost adoptat ca standard ANSI în martie 2000.
+
+Noile aspecte ale limbajului C includ:
+
+funcții inline
+variablele pot fi declarate oriunde în cadrul unui program (la fel ca și în C++)
+câteva noi tipuri de date, incluzând și long long int (pentru a reduce efortul legat de tranziția de la 32-biți la 64-biți), un tip explicit de date boolean și un tip complex de date reprezentând numerele complexe
+tablourile de dimensiuni variabile
+suport pentru comentariile pe o singură linie, marcate la început de //, ca și în BCPL sau C++ și care au fost suportate de multe compilatoare ca o extensie a limbajului C
+noi funcții, cum ar fi snprintf()
+noi fișiere header, cum ar fi stdint.h
+În ceea ce privește interesul în adoptarea noului standard C99, dacă GCC și alte compilatoare suportă noile caracteristici C99, compilatoarele celor de la Microsoft și Borland nu suportă C99 și cele două companii nu par interesate în a oferi nici un fel de suport.

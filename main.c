@@ -20,7 +20,7 @@ int	main(void)
 	file = open("test", O_RDONLY);
 	while (get_next_line(file, &str))
 	{
-		printf("main - <%s>\n\n\n", str);
+		printf("<%s>\n", str);
 		free(str);
 	}
 	return (0);
