@@ -28,11 +28,15 @@ int	ft_add_stack(char **stack, char *buff)
 	j = 0;
 	while (buff[j])
 		j++;
+	printf("malloc sus - %d\n", i + j + 1);
 	if ((tmp = (char *)malloc(sizeof(char) * (i + j + 1))) == NULL)
 		return (0);
-	i = i == 0 ? 0 : -1;
-	while (stk && stk[++i])
+	i = 0;
+	while (stk && stk[i])
+	{
 		tmp[i] = stk[i];
+		i++;
+	}
 	j = -1;
 	while (buff[++j])
 	{
@@ -66,6 +70,7 @@ int	delete_first_line(char **stack)
 	j = i;
 	while ((*stack)[j] != '\0')
 		j++;
+	printf("malloc - %d\n", j - 1 + 1);
 	if ((tmp = (char *)malloc(sizeof(char) * (j - 1 + 1))) == NULL)
 		return (0);
 	j = 0;
@@ -90,7 +95,7 @@ char	*get_single_line(char *stack)
 		if ((ret = (char *)malloc(sizeof(char) * (i + 1))) == NULL)
 			return (NULL);
 		ret[i--] = '\0';
-		while (stack[i])
+		while (i >= 0)
 		{
 			ret[i] = stack[i];
 			i--;
@@ -118,6 +123,7 @@ int get_next_line(int const fd, char **line)
 		{
 			*line = get_single_line(stack);
 			delete_first_line(&stack);
+			free_boff(buff, BUFF_SIZE);
 			return (1);
 		}
 		free_boff(buff, BUFF_SIZE);
