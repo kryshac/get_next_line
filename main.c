@@ -42,43 +42,47 @@ int     main(void)
 
 
 
-	// int 	file;
-	// char	*str;
-	// int		i;
-    //
-	// i = 0;
-	// file = open("test", O_RDONLY);
-	// while (get_next_line(file, &str) == 1)
-	// {
-	// 	printf("<%s>\n", str);
-	// 	free(str);
-	// 	i++;
-	// }
-	// return (0);
-	char    *line;
-   int             out;
-   int             p[2];
-   int             fd;
+	int 	file;
+	char	*str;
+	int		i;
 
-   fd = 1;
-   out = dup(fd);
-   pipe(p);
-
-   dup2(p[1], fd);
-   write(fd, "aaa\nbbb\nccc\nddd\n", 16);
-   dup2(out, fd);
-   close(p[1]);
-   get_next_line(p[0], &line);
-   printf("test - %s\n", line);
-   if(strcmp(line, "aaa") == 0)
-   	printf("nu merge\n");
-   get_next_line(p[0], &line);
-   if (strcmp(line, "bbb") == 0)
-   		printf("nu merge\n");
-   get_next_line(p[0], &line);
-   if (strcmp(line, "ccc") == 0)
-   		printf("nu merge\n");
-   get_next_line(p[0], &line);
-   if (strcmp(line, "ddd") == 0)
-   		printf("nu merge\n");
+	i = 0;
+	file = open("test", O_RDONLY);
+	while (get_next_line(file, &str) == 1)
+	{
+		printf("<%s>\n", str);
+		free(str);
+		i++;
+	}
+	return (0);
+	// char    *line;
+   // int             out;
+   // int             p[2];
+   // int             fd;
+   //
+   // fd = 1;
+   // out = dup(fd);
+   // pipe(p);
+   //
+   // dup2(p[1], fd);
+   // write(fd, "aaa\nbbb\nccc\nddd\n", 16);
+   // dup2(out, fd);
+   // close(p[1]);
+   // get_next_line(p[0], &line);
+   // printf("test - |%s|\n", line);
+   // if(strcmp(line, "aaa") == 0)
+   // 	printf("nu merge1\n");
+	// free(line);
+   // get_next_line(p[0], &line);
+   // if (strcmp(line, "bbb") == 0)
+   // 		printf("nu merge\n");
+	// free(line);
+   // get_next_line(p[0], &line);
+   // if (strcmp(line, "ccc") == 0)
+   // 		printf("nu merge\n");
+	// free(line);
+   // get_next_line(p[0], &line);
+   // if (strcmp(line, "ddd") == 0)
+   // 		printf("nu merge\n");
+	// free(line);
 }

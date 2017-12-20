@@ -37,7 +37,10 @@ int	ft_add_stack(char **stk, char *buff)
 		return (-1);
 	i = 0;
 	while (*stk && (*stk)[i])
-		tmp[i] = (*stk)[i++];
+	{
+		tmp[i] = (*stk)[i];
+		i++;
+	}
 	ret = 0;
 	j = 0;
 	while (buff[j])
@@ -111,13 +114,13 @@ int	delete_first_line(char **stack)
 	j = i;
 	while ((*stack)[j] != '\0')
 		j++;
-	// if (i == j)
-	// {
-	// 	if (*stack)
-	// 		free(*stack);
-	// 	*stack = NULL;
-	// 	return (1);
-	// }
+	if (i == j)
+	{
+		if (*stack)
+			free(*stack);
+		*stack = NULL;
+		return (1);
+	}
 	if ((tmp = (char *)malloc(sizeof(char) * (j - i + 1))) == NULL)
 		return (0);
 	j = 0;
@@ -185,5 +188,5 @@ int get_next_line(int const fd, char **line)
 		free(stack);
 		return (0);
 	}
-	return (1);
+	return (-1);
 }
