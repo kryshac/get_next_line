@@ -186,7 +186,8 @@ int get_next_line(int const fd, char **line)
 	{
 		*line = get_single_line(stack, 1);
 		free(stack);
-		return (0);
+		stack = NULL;
+		return (1);
 	}
-	return (-1);
+	return (0);
 }
