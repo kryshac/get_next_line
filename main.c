@@ -15,13 +15,22 @@
 int	main(void)
 {
 	int 	file;
+	int 	file1;
 	char	*str;
+	int		i;
 
+	i = 0;
 	file = open("test", O_RDONLY);
-	while (get_next_line(file, &str))
+	file1 = open("abc", O_RDONLY);
+	while (i < 3)
 	{
+		get_next_line(file, &str);
 		printf("<%s>\n", str);
 		free(str);
+		get_next_line(file1, &str);
+		printf("<%s>\n", str);
+		free(str);
+		i++;
 	}
 	return (0);
 }

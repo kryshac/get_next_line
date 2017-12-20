@@ -4,7 +4,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <stdio.h>
-# define BUFF_SIZE 200
+# define BUFF_SIZE 6
 
 int get_next_line(int const fd, char ** line);
 
