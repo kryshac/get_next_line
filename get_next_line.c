@@ -163,6 +163,8 @@ int get_next_line(int const fd, char **line)
 	size_t		buffsize;
 	int			addstk;
 
+	if (fd < 0)
+		return (-1);
 	if (stack && (*line = get_single_line(stack, 0)) != NULL)
 	{
 		delete_first_line(&stack);
