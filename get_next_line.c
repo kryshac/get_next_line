@@ -6,7 +6,7 @@
 /*   By: ccristia <ccristia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 15:10:17 by ccristia          #+#    #+#             */
-/*   Updated: 2017/12/21 21:23:45 by ccristia         ###   ########.fr       */
+/*   Updated: 2017/12/21 22:41:27 by ccristia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@ int	ft_add_stack(char **stk, char *bf)
 	char	*tp;
 	char	*tmp;
 	int		ret;
+	int		i;
 
 	tp = (char *)malloc(sizeof(char) * (f_s(*stk, 0) + f_s(bf, 0) + 1));
 	if (tp == NULL)
 		return (-1);
 	tmp = tp;
-	while (*stk && *(*stk))
-		*tp++ = *(*stk)++;
+	i = 0;
+	while (*stk && (*stk)[i])
+		*tp++ = (*stk)[i++];
 	ret = 0;
 	while (*bf)
 	{
@@ -42,6 +44,8 @@ int	ft_add_stack(char **stk, char *bf)
 		*tp++ = *bf++;
 	}
 	*tp = '\0';
+	if (*stk)
+		free(*stk);
 	*stk = tmp;
 	return (ret);
 }
@@ -87,6 +91,11 @@ int	check_stack(char **line, char **stk, int type)
 	else if (type == 0 && (*stk)[0])
 	{
 		intret = get_line(line, stk, type);
+		free(*stk);
+		*stk = NULL;
+	}
+	if (type == 0 && intret == 0 && *stk)
+	{
 		free(*stk);
 		*stk = NULL;
 	}
