@@ -1,6 +1,6 @@
 NAME	= get
 COM		= gcc
-FLAGS	= 
+FLAGS	= -Wall -Wextra -Werror
 SRC		= main.c get_next_line.c
 OBJ		= $(SRC:%.c=%.o)
 

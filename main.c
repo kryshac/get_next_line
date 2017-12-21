@@ -6,7 +6,7 @@
 /*   By: ccristia <ccristia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/19 16:08:14 by ccristia          #+#    #+#             */
-/*   Updated: 2017/12/19 20:27:08 by ccristia         ###   ########.fr       */
+/*   Updated: 2017/12/21 20:55:04 by ccristia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,50 +40,83 @@ int     main(void)
     // }
     // return (0);
 
+	//
+	//
+	// char		*line;
+	// int			fd;
+	// int			ret;
+	// char		*filename;
+	//
+	// filename = "../42FileChecker/srcs/gnl/gnl9_2.txt";
+	// fd = open(filename, O_RDONLY);
+	// if (fd > 2)
+	// {
+	// 	if (close(fd) == 0)
+	// 	{
+	// 		line = NULL;
+	// 		ret = get_next_line(fd, &line);
+	// 		if (ret != -1)
+	// 			printf("-> must have returned '-1' when receiving a closed file descriptor\n");
+	// 		else
+	// 			printf("OK\n");
+	// 	}
+	// 	else
+	// 	{
+	// 		printf("An error occured while closing file descriptor associated with file %s\n", filename);
+	// 		return (0);
+	// 	}
+	// }
+	// else
+	// 	printf("An error occured while opening file %s\n", filename);
+	// return (0);
 
+	// int 	file;
+	// char	*str;
+	//
+	// file = open("test", O_RDONLY);
+	// get_next_line(file, &str);
+	// printf("<%s>\n", str);
+	// get_next_line(file, &str);
+	// printf("<%s>\n", str);
+	// //free(str);
+	// return (0);
 
 	char		*line;
 	int			fd;
 	int			ret;
+	int			count_lines;
 	char		*filename;
+	int			errors;
 
-	filename = "../42FileChecker/srcs/gnl/gnl9_2.txt";
+	filename = "gnl5_2.txt";
 	fd = open(filename, O_RDONLY);
 	if (fd > 2)
 	{
-		if (close(fd) == 0)
+		count_lines = 0;
+		errors = 0;
+		line = NULL;
+		while ((ret = get_next_line(fd, &line)) > 0)
 		{
-			line = NULL;
-			ret = get_next_line(fd, &line);
-			if (ret != -1)
-				printf("-> must have returned '-1' when receiving a closed file descriptor\n");
-			else
-				printf("OK\n");
+			printf("line - %s\n", line);
+			if (count_lines == 0 && strcmp(line, "123") != 0)
+				errors++;
+			if (count_lines == 1 && strcmp(line, "abc") != 0)
+				errors++;
+			count_lines++;
+			if (count_lines > 50)
+				break ;
 		}
-		else
-		{
-			printf("An error occured while closing file descriptor associated with file %s\n", filename);
-			return (0);
-		}
+		close(fd);
+		if (count_lines != 2)
+			printf("-> must have returned '1' twice instead of %d time(s)\n", count_lines);
+		if (errors > 0)
+			printf("-> must have read \"123\" and \"abc\"\n");
+		if (count_lines == 2 && errors == 0)
+			printf("OK\n");
 	}
 	else
 		printf("An error occured while opening file %s\n", filename);
 	return (0);
-
-	// int 	file;
-	// char	*str;
-	// int		i;
-	//
-	// i = 0;
-	// file = open("test", O_RDONLY);
-	// while (get_next_line(file, &str) == 1)
-	// {
-	// 	printf("<%s>\n", str);
-	// 	free(str);
-	// 	i++;
-	// }
-	// return (0);
-
 
 
 

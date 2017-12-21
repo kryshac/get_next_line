@@ -5,193 +5,119 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccristia <ccristia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/19 16:06:13 by ccristia          #+#    #+#             */
-/*   Updated: 2017/12/19 20:57:02 by ccristia         ###   ########.fr       */
+/*   Created: 2017/12/21 15:10:17 by ccristia          #+#    #+#             */
+/*   Updated: 2017/12/21 21:23:45 by ccristia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_sts(char *str1, char *str2)
+int	f_s(char *str, int type)
 {
-	int		i;
-	int		j;
+	int i;
 
 	i = 0;
-	while (str1 && str1[i])
+	while ((type == 0 && str && str[i]) || (type == 1 && str[i] != '\n'))
 		i++;
-	j = 0;
-	while (str2 && str2[j])
-		j++;
-	return (i + j);
+	return (i);
 }
 
-int	ft_add_stack(char **stk, char *buff)
+int	ft_add_stack(char **stk, char *bf)
 {
+	char	*tp;
 	char	*tmp;
-	int		i;
-	int		j;
 	int		ret;
 
-	if ((tmp = (char *)malloc(sizeof(char) * (ft_sts(*stk, buff) + 1))) == NULL)
+	tp = (char *)malloc(sizeof(char) * (f_s(*stk, 0) + f_s(bf, 0) + 1));
+	if (tp == NULL)
 		return (-1);
-	i = 0;
-	while (*stk && (*stk)[i])
-	{
-		tmp[i] = (*stk)[i];
-		i++;
-	}
+	tmp = tp;
+	while (*stk && *(*stk))
+		*tp++ = *(*stk)++;
 	ret = 0;
-	j = 0;
-	while (buff[j])
+	while (*bf)
 	{
-		if (buff[j] == '\n')
+		if (*bf == '\n')
 			ret = 1;
-		tmp[i++] = buff[j++];
+		*tp++ = *bf++;
 	}
-	tmp[i] = '\0';
-	if (*stk)
-		free(*stk);
+	*tp = '\0';
 	*stk = tmp;
 	return (ret);
 }
 
-// int	ft_add_stack(char **stack, char *buff)
-// {
-// 	char	*stk;
-// 	char	*tmp;
-// 	int		i;
-// 	int		j;
-// 	int		ret;
-//
-// 	ret = 0;
-// 	stk = *stack;
-// 	i = 0;
-// 	while (stk && stk[i])
-// 		i++;
-// 	j = 0;
-// 	while (buff[j])
-// 		j++;
-// 	if ((tmp = (char *)malloc(sizeof(char) * (i + j + 1))) == NULL)
-// 		return (0);
-// 	i = 0;
-// 	while (stk && stk[i])
-// 	{
-// 		tmp[i] = stk[i];
-// 		i++;
-// 	}
-// 	j = 0;
-// 	while (buff[j])
-// 	{
-// 		if (buff[j] == '\n')
-// 			ret = 1;
-// 		tmp[i++] = buff[j];
-// 		j++;
-// 	}
-// 	tmp[i] = '\0';
-// 	if (*stack)
-// 		free(*stack);
-// 	*stack = tmp;
-// 	return (ret);
-// }
-
-void	free_boff(char *buff, int size)
+int	get_line(char **line, char **stk, int type)
 {
-	while (size > 0)
-		buff[--size] = '\0';
-}
+	char	*tmp;
+	int		i;
+	int		j;
 
-int	delete_first_line(char **stack)
-{
-	char *tmp;
-	int	i;
-	int	j;
-
-	i = 0;
-	while ((*stack)[i] != '\n' && (*stack)[i] != '\0')
-		i++;
-	i++;
-	j = i;
-	while ((*stack)[j] != '\0')
-		j++;
-	if (i == j)
-	{
-		if (*stack)
-			free(*stack);
-		*stack = NULL;
-		return (1);
-	}
-	if ((tmp = (char *)malloc(sizeof(char) * (j - i + 1))) == NULL)
-		return (0);
+	i = f_s(*stk, type);
+	if ((tmp = (char *)malloc(sizeof(char) * (i + 1))) == NULL)
+		return (-1);
+	*line = tmp;
 	j = 0;
-	while ((*stack)[i])
-		tmp[j++] = (*stack)[i++];
-	tmp[j] = '\0';
-	free(*stack);
-	*stack = tmp;
+	while ((type == 1 && (*stk)[j] != '\n') || (type == 0 && (*stk)[j]))
+		*tmp++ = (*stk)[j++];
+	*tmp = '\0';
+	j = 0;
+	while ((*stk)[j + i + 1])
+	{
+		(*stk)[j] = (*stk)[j + i + 1];
+		j++;
+	}
+	(*stk)[j] = '\0';
 	return (1);
 }
 
-char	*get_single_line(char *stack, int type)
+int	check_stack(char **line, char **stk, int type)
 {
-	char	*ret;
-	int		i;
+	int	intret;
+	int	i;
 
-	i = 0;
-	while (stack[i] != '\n' && stack[i] != '\0')
-		i++;
-	if (stack[i] == '\n' || (type == 1 && stack[i] == '\0'))
+	intret = 0;
+	if (type == 1)
 	{
-		if ((ret = (char *)malloc(sizeof(char) * (i + 1))) == NULL)
-			return (NULL);
-		ret[i--] = '\0';
-		while (i >= 0)
-		{
-			ret[i] = stack[i];
-			i--;
-		}
-		return (ret);
+		i = 0;
+		while ((*stk)[i] && (*stk)[i] != '\n')
+			i++;
 	}
-	else
-		return (NULL);
+	if (type == 1 && (*stk)[i] == '\n')
+		intret = get_line(line, stk, type);
+	else if (type == 0 && (*stk)[0])
+	{
+		intret = get_line(line, stk, type);
+		free(*stk);
+		*stk = NULL;
+	}
+	return (intret);
 }
 
-int get_next_line(int const fd, char **line)
+int	get_next_line(int const fd, char **line)
 {
-	static char	*stack;
+	static char	*stk[1024];
 	char		buff[BUFF_SIZE + 1];
-	size_t		buffsize;
-	int			addstk;
+	int			intret;
+	int			i;
 
 	if (fd < 0)
 		return (-1);
-	if (stack && (*line = get_single_line(stack, 0)) != NULL)
+	if (stk[fd] && (intret = check_stack(line, &stk[fd], 1)) != 0)
+		return (intret);
+	while ((intret = (int)read(fd, &buff, BUFF_SIZE)) != 0)
 	{
-		delete_first_line(&stack);
-		return (1);
-	}
-	while ((buffsize = read(fd, &buff, BUFF_SIZE)) > 0)
-	{
-		if (buffsize == (size_t)-1)
+		if (intret == -1)
 			return (-1);
-		buff[buffsize] = '\0';
-		if ((addstk = ft_add_stack(&stack, buff)) == -1)
+		buff[intret] = '\0';
+		if ((intret = ft_add_stack(&stk[fd], buff)) == -1)
 			return (-1);
-		if (addstk == 1)
-		{
-			*line = get_single_line(stack, 0);
-			delete_first_line(&stack);
-			free_boff(buff, BUFF_SIZE);
-			return (1);
-		}
-		free_boff(buff, BUFF_SIZE);
+		if (intret == 1)
+			return (get_line(line, &stk[fd], 1));
+		i = BUFF_SIZE;
+		while (i >= 0)
+			buff[i--] = '\0';
 	}
-	if (stack)
-	{
-		*line = get_single_line(stack, 1);
-		free(stack);
-		stack = NULL;
-		return (1);
-	}
+	if (stk[fd] && (intret = check_stack(line, &stk[fd], 0)) != 0)
+		return (intret);
 	return (0);
 }
