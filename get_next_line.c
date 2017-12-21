@@ -172,6 +172,8 @@ int get_next_line(int const fd, char **line)
 	}
 	while ((buffsize = read(fd, &buff, BUFF_SIZE)) > 0)
 	{
+		if (buffsize == -1)
+			return (-1);
 		buff[buffsize] = '\0';
 		if ((addstk = ft_add_stack(&stack, buff)) == -1)
 			return (-1);
