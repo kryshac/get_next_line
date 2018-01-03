@@ -1,0 +1,13 @@
+NAME	= get
+COM		= gcc
+FLAGS	=
+SRC		= main.c get_next_line.c
+OBJ		= $(SRC:%.c=%.o)
+
+all:
+	@make -C libft/ fclean
+	@make -C libft/
+	@clang -Wall -Wextra -Werror -I libft/includes/ -c get_next_line.c
+	@clang -Wall -Wextra -Werror -I libft/includes/ -c main.c
+	@clang -o test_gnl get_next_line.o main.o -L libft/ -lft
+	@./test_gnl
